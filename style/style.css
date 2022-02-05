@@ -15,6 +15,10 @@ body * {
     box-sizing: border-box;
 }
 
+h1, p {
+    border: none;
+}
+
 .calculator-container {
     display: flex;
     position: absolute;
@@ -26,7 +30,7 @@ body * {
     margin: 5px;   
     
 }
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
     .calculator-container {
         height: 100%;
         width: 100%;
@@ -45,14 +49,14 @@ body * {
     width: auto;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     border: none;
     margin: 0 5px;
     
 }
 
 .display-content h1 {
-    text-overflow: ellipsis;
+    font-size: 28px;
 }
 
 
@@ -70,7 +74,13 @@ body * {
     align-items: center;
     justify-content: center;
     font-size: 23px;
+    
 }
+
+.button:hover {
+    cursor: pointer;
+}
+
 .equal {
     width: 100%;
 }
