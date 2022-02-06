@@ -10,7 +10,7 @@ window.onload = () => {
         "Can't you choose something else besides zero after /?",
         "Do that to your own calculator and see how it feels",
         "That ain't possible my friend",
-        "I suggest you learn division"
+        "I suggest you learn division. Actually, the search bar up there"
     ];
 
     const buttonText = [
@@ -39,29 +39,31 @@ window.onload = () => {
     const numberButtons = button.filter(i => isNumberOrPeriod(i.value));
     
     // set non-numbered buttons not including =
-    const nonNumberedButtons = button.filter(i => !isNumberOrPeriod(i.value) && i.value !== '=');
+    const nonNumberedButtons = button.filter(i => !isNumberOrPeriod(i.value) && !isButtonEqual(i.value));
 
     // set equal button
-    const equalButton = button.find(i => i.value === '=');
+    const equalButton = button.find(i => isButtonEqual(i.value));
     
-    // print numbered buttons on click
+    // Print numbered buttons on click
     numberButtons.forEach(i => {
         i.addEventListener('click', e => concatToDisplay(e.target.value));
     });
 
-    // 
+    // Key is pressed
     window.addEventListener('keydown', keyPressed);
 
+    // If non numbered buttons are pressed
     nonNumberedButtons.forEach(i => {
         i.addEventListener('click', e => nonNumberedPressed(e.target));
     })
 
+    // If the equal button is pressed
     equalButton.addEventListener('click', equalButtonPressed);
 
     // Create calculator buttons
     function createButtons() {
         buttonText.forEach(i => {
-            let currentButton = document.createElement('button');
+            let currentButton = document.createElement('div');
             currentButton.classList.add('button');
             currentButton.value = i == 'x' ? '*' : i;
             currentButton.textContent = i;
@@ -69,7 +71,10 @@ window.onload = () => {
         });
     }
 
-    
+    function isButtonEqual(val) {
+        return val === '=';
+    }
+
     // check if number or period was pressed
     function isNumberOrPeriod(val) {
         return !isNaN(parseFloat(val)) || val === '.';
@@ -77,8 +82,7 @@ window.onload = () => {
 
     // do something to typed key
     function keyPressed(event) {
-        if (isNumberOrPeriod(event.key))
-        {
+        if (isNumberOrPeriod(event.key)) {
             concatToDisplay(event.key);
         }
         else if (event.key === 'Enter' || event.key === '=') {
@@ -92,18 +96,18 @@ window.onload = () => {
                 if (i.value === event.key) {
                      nonNumberedPressed(i);
                  }
-             })
+             });
         }
     } 
     
     // change button color on hover
     function hoverButton() {
-        this.style.backgroundColor = '#d0d0d7'
+        this.style.backgroundColor = 'orange'
     }
 
     // reset button on mouseout
     function unHoverButton() {
-        this.style.backgroundColor = '#e9e9ed';
+        this.style.backgroundColor = 'blue';
     }
 
     function removeHoverEffect () {
@@ -118,9 +122,10 @@ window.onload = () => {
 
     function addHoverEffect() {
         nonNumberedButtons.forEach(i => {
-            i.style.backgroundColor = '#e9e9ed'
+            i.style.backgroundColor = 'blue'
             i.addEventListener('mouseover', hoverButton);
             i.addEventListener('mouseout', unHoverButton);
+            
         })
     }
 
@@ -168,7 +173,7 @@ window.onload = () => {
         return num1 * num2;
     }
 
-    // divide two numbers (fool proof)
+    // divide two numbers
     function divide (num1, num2) {
         if (num2 === 0) {
             let message = Math.floor(Math.random() * divideByZeroMessages.length);
@@ -208,7 +213,7 @@ window.onload = () => {
         data.firstNum = 0;
         data.secondNum = 0;
         data.displayValue = '';
-        removeHoverEffect();
+        addHoverEffect();
         changeClearButton('AC');
         putDisplay('');
     }
@@ -241,16 +246,16 @@ window.onload = () => {
         }
     }
 
-    // If an operator is pressed (+-*/% +/-)
+    // If an operator is pressed (+-*/%)
     function operatorPressed(event) {
+        
         if (event.value === '%') {
             putDisplay(percentage(parseFloat(numberDisplay.textContent)));
         }
         else if (event.value === '+/-') {
-            putDisplay(multiply(parseFloat(numberDisplay.textContent), -1))
+            putDisplay(multiply(parseFloat(numberDisplay.textContent), -1));
         }
         else {
-            numberDisplay.style.color = 'rgba(0, 0, 0, 0.5)';
             event.style.backgroundColor = 'orange';
             removeHoverEffect();
 
