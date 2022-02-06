@@ -10,7 +10,7 @@ window.onload = () => {
         "Can't you choose something else besides zero after /?",
         "Do that to your own calculator and see how it feels",
         "That ain't possible my friend",
-        "I suggest you learn division. Actually, the search bar up there"
+        "I suggest you learn division. Actually, the search bar is up there"
     ];
 
     const buttonText = [
@@ -212,7 +212,9 @@ window.onload = () => {
     function clear() {
         data.firstNum = 0;
         data.secondNum = 0;
+        data.result = 0;
         data.displayValue = '';
+        data.isEquationCalculatable = false;
         addHoverEffect();
         changeClearButton('AC');
         putDisplay('');
@@ -259,7 +261,7 @@ window.onload = () => {
             event.style.backgroundColor = 'orange';
             removeHoverEffect();
 
-            if (data.isSecondNumSetable) {
+            if (data.isEquationCalculatable) {
                 calculate();
             }
     

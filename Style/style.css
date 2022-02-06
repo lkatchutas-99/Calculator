@@ -15,10 +15,6 @@ body * {
     box-sizing: border-box;
 }
 
-h1, p {
-    border: none;
-}
-
 .calculator-container {
     display: flex;
     flex-direction: column;
@@ -57,10 +53,8 @@ h1, p {
 .display-content h1 {
     font-size: 1.5rem;
     text-align: center;
-    flex-wrap: wrap;
+    
     color: white;
-    
-    
 }
 
 .button-container {
@@ -88,8 +82,4 @@ h1, p {
 .button:hover {
     cursor: pointer;
     background: orange;
-}
-
-.equal {
-    width: 100%;
 }
