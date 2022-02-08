@@ -125,7 +125,6 @@ window.onload = () => {
             i.style.backgroundColor = 'blue'
             i.addEventListener('mouseover', hoverButton);
             i.addEventListener('mouseout', unHoverButton);
-            
         })
     }
 
@@ -152,8 +151,7 @@ window.onload = () => {
         data.displayValue = data.displayValue.slice(0, -1);
         
         if (!data.displayValue) {
-            data.isSecondNumSetable = false;
-            changeClearButton('AC');
+            clear();
         }
         putDisplay(data.displayValue);
     }
@@ -241,10 +239,10 @@ window.onload = () => {
 
     // calculate if equal is pressed
     function equalButtonPressed(){
-        if (data.isSecondNumSetable)
+        if (data.isEquationCalculatable)
         {
             calculate();
-            data.isSecondNumSetable = false;
+            data.isEquationCalculatable = false;
         }
     }
 
@@ -271,7 +269,7 @@ window.onload = () => {
             putDisplay(data.firstNum);
 
             data.displayValue = '';
-            data.isSecondNumSetable = true;
+            data.isEquationCalculatable = true;
         }
     }
 
